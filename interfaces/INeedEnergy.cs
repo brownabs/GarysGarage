@@ -8,7 +8,7 @@ namespace garysgarage
     {
 
         int Capacity { get; set; }
-        void GoToRefuelStation(List<T> vehicles){
+        void Refuel(List<T> vehicles){
 
         }
     }

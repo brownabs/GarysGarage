@@ -7,13 +7,20 @@ namespace garysgarage
     {
         static void Main(string[] args)
         {
-            Zero Ford = new Zero()
+
+            /*
+              Create some battery powered vehicles, add them to a Type IElectricPower List
+              and then iterate the List to charge their batteries.
+            */
+
+            //Adding Battery Powered vehicles : creating Ranger from the Ford Class, creating TeslaLarge and TelsaMini from the Tesla Class
+            Ford Ranger = new Ford()
             {
                 MainColor = "Green",
                 MaximumOccupancy = 2,
                 BatteryKWh = 001.01
             };
-            Zero Mustang = new Zero()
+            Tesla TeslaLarge = new Tesla()
             {
                 MainColor = "White",
                 MaximumOccupancy = 4,
@@ -26,19 +33,25 @@ namespace garysgarage
                 BatteryKWh = 313.12
             };
 
+            //add them to a Type IElectricPower List
+
             List<IElectricPowered> electricVehicles = new List<IElectricPowered>();
 
-            electricVehicles.Add(Ford);
-            electricVehicles.Add(Mustang);
+            electricVehicles.Add(Ranger);
+            electricVehicles.Add(TeslaLarge);
             electricVehicles.Add(TelsaMini);
+
+            //iterate the List to charge their batteries.
 
             electricVehicles.ForEach(gv => gv.ChargeBattery());
 
             /*
-                Create some gas vehicles, add them to a List
+                Create some gas vehicles, add them to a IGasPowered Type List
                 and then iterate the List to fill all of their
                 fuel tanks.
             */
+
+            //Create some gas vehicles
             Ram RamF150 = new Ram()
             {
                 MainColor = "Red",
@@ -52,27 +65,33 @@ namespace garysgarage
                 FuelCapacity = 55.23
             };
 
+            //add them to a IGasPowered Type List
             //different way to add vehicles to the gasVehicles list
             List<IGasPowered> gasVehicles = new List<IGasPowered>() {
                 RamF150, CessnaF150
             };
 
+
+            //iterate the List to fill all of their fuel tanks
+
             gasVehicles.ForEach(gv => gv.RefuelGasTank());
 
 
-            GasStation NeedsGas = new GasStation();
-            BatteryStation NeedsElectricity = new BatteryStation();
-
-            NeedsGas.GoToRefuelStation(gasVehicles);
-            NeedsElectricity.GoToRefuelStation(electricVehicles);
+            GasStation Shell = new GasStation();
+            BatteryStation BatteryPod = new BatteryStation();
 
 
-            Ford.Drive();
-            Ford.Turn();
-            Ford.Stop();
-            Mustang.Drive();
-            Mustang.Turn();
-            Mustang.Stop();
+            //Gas Station = Refuel is method from the INeedEnergy Interface
+            Shell.Refuel(gasVehicles);
+            BatteryPod.Refuel(electricVehicles);
+
+
+            Ranger.Drive();
+            Ranger.Turn();
+            Ranger.Stop();
+            TeslaLarge.Drive();
+            TeslaLarge.Turn();
+            TeslaLarge.Stop();
             TelsaMini.Drive();
             TelsaMini.Turn();
             TelsaMini.Stop();
@@ -82,7 +101,6 @@ namespace garysgarage
             CessnaF150.Drive();
             CessnaF150.Turn();
             CessnaF150.Stop();
-
 
         }
     }

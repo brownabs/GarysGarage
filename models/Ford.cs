@@ -3,7 +3,7 @@ using System;
 namespace garysgarage
 {
 
-    public class Zero : Vehicle, IElectricPowered
+    public class Ford : Vehicle, IElectricPowered
     {
         public double BatteryKWh { get; set; }
         public void ChargeBattery()
